@@ -18,5 +18,8 @@ apt-get update
 apt-get install -y nvidia-docker2
 pkill -SIGHUP dockerd
 
+# Install libcuda1 and cuda-toolkit
+apt-get install -y libcuda1-384 nvidia-cuda-toolkit
+
 # Test nvidia-smi with the latest official CUDA image
 # docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi
