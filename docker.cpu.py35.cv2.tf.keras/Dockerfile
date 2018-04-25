@@ -47,3 +47,4 @@ RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/ope
     && make install
 
 RUN pip install scikit-image seaborn theano keras
+RUN pip install falcon falcon-cors gunicorn httpie
