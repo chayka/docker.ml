@@ -10,13 +10,34 @@ This repo contains docker images handy for running tensorflow, keras, opencv on 
 ./install-docker-ce.sh
 ```
 
-## 2. Install nvidia-docker
+## 2. Install nvidia drivers
+
+Run
+```
+./install-nvidia-drivers.sh
+```
+
+Now reboot your server
+```
+sudo shutdown -r now
+```
+
+Check if drivers are working:
+```
+lsmod | grep nvidia
+```
+or
+```
+nvidia-smi
+```
+
+## 3. Install nvidia-docker
 
 ```
 ./install-nvidia-docker.sh
 ```
 
-## 3. Build docker image
+## 4. Build docker image
 
 For GPU instance:
 ```
@@ -30,7 +51,7 @@ cd ./docker.cpu.py35.cv2.tf.keras
 nvidia-docker build -t chayka/ml:cpu.gpu.py35.cv2.tf.keras .
 ```
 
-## 4. Install screen (optional)
+## 5. Install screen (optional)
 
 That is optional but might be handy for running
 ```
