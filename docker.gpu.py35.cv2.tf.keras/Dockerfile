@@ -23,7 +23,8 @@ RUN pip install numpy==1.13.0
 
 WORKDIR /
 ENV OPENCV_VERSION="3.4.1"
-ENV LD_LIBRARY_PATH="/usr/local/cuda-9.0/targets/x86_64-linux/lib/:${LD_LIBRARY_PATH}"
+ENV CUDA_LIB_PTH="/usr/local/cuda-9.0/targets/x86_64-linux/lib"
+ENV LD_LIBRARY_PATH="${CUDA_LIB_PTH}:${LD_LIBRARY_PATH}"
 RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv.git && \
     git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv_contrib.git && \
     mkdir /opencv/build && \
@@ -45,7 +46,10 @@ RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/ope
         -DCMAKE_INSTALL_PREFIX=$(python3.5 -c "import sys; print(sys.prefix)") \
         -DPYTHON_EXECUTABLE=$(which python3.5) \
         -DPYTHON_INCLUDE_DIR=$(python3.5 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
-        -DPYTHON_PACKAGES_PATH=$(python3.5 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") .. \
+        -DPYTHON_PACKAGES_PATH=$(python3.5 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
+        -DCUDA_cublas_LIBRARY="${CUDA_LIB_PTH}/libcublas.so" \
+        -DCUDA_cufft_LIBRARY="${CUDA_LIB_PTH}/libcufft.so" \
+        .. \
     && make install
 
 RUN pip install scikit-image seaborn theano keras
