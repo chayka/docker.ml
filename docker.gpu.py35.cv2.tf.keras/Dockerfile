@@ -25,8 +25,8 @@ RUN pip install numpy
 
 WORKDIR /
 ENV OPENCV_VERSION="3.4.1"
-ENV CUDA_LIB_PTH="/usr/local/cuda-9.0/targets/x86_64-linux/lib"
-ENV LD_LIBRARY_PATH="${CUDA_LIB_PTH}:${LD_LIBRARY_PATH}"
+ENV CUDA_LIB_PATH="/usr/local/cuda-9.0/targets/x86_64-linux/lib"
+ENV LD_LIBRARY_PATH="${CUDA_LIB_PATH}:${LD_LIBRARY_PATH}"
 RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv.git && \
     git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv_contrib.git && \
     mkdir /opencv/build && \
