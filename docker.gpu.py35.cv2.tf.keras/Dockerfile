@@ -22,7 +22,7 @@ RUN apt-get update && \
 RUN pip install numpy==1.13.0 
 
 WORKDIR /
-ENV OPENCV_VERSION="3.4.0"
+ENV OPENCV_VERSION="3.4.1"
 ENV LD_LIBRARY_PATH="/usr/local/cuda-9.0/targets/x86_64-linux/lib/:${LD_LIBRARY_PATH}"
 RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv.git && \
     git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv_contrib.git && \
