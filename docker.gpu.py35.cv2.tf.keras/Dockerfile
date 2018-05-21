@@ -29,21 +29,22 @@ ENV CUDA_LIB_PATH="/usr/local/cuda-9.0/targets/x86_64-linux/lib"
 ENV LD_LIBRARY_PATH="${CUDA_LIB_PATH}:${LD_LIBRARY_PATH}"
 RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv.git && \
     git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv_contrib.git && \
-    mkdir /opencv/build && \
-    cd /opencv/build && \
+    mkdir /opencv/build
+RUN cd /opencv/build && \
     cmake \
-        -DBUILD_TIFF=ON \
-        -DBUILD_opencv_java=OFF \
         -DWITH_CUDA=ON \
-        -DENABLE_AVX=ON \
+        -DCUDA_LIB_PATH=${CUDA_LIB_PATH} \
         -DWITH_OPENGL=ON \
         -DWITH_OPENCL=ON \
         -DWITH_IPP=ON \
         -DWITH_TBB=ON \
         -DWITH_EIGEN=ON \
         -DWITH_V4L=ON \
+        -DENABLE_AVX=ON \
+        -DBUILD_TIFF=ON \
         -DBUILD_TESTS=OFF \
         -DBUILD_PERF_TESTS=OFF \
+        -DBUILD_opencv_java=OFF \
         -DCMAKE_BUILD_TYPE=RELEASE \
         -DCMAKE_INSTALL_PREFIX=$(python3.5 -c "import sys; print(sys.prefix)") \
         -DPYTHON_EXECUTABLE=$(which python3.5) \
