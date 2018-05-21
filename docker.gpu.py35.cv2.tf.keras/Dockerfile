@@ -49,6 +49,18 @@ RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/ope
         -DPYTHON_PACKAGES_PATH=$(python3.5 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
         -DCUDA_cublas_LIBRARY="${CUDA_LIB_PTH}/libcublas.so" \
         -DCUDA_cufft_LIBRARY="${CUDA_LIB_PTH}/libcufft.so" \
+        -DCUDA_nppc_LIBRARY="${CUDA_LIB_PTH}/libnppc.so" \
+        -DCUDA_nppial_LIBRARY="${CUDA_LIB_PTH}/libnppial.so" \
+        -DCUDA_nppicc_LIBRARY="${CUDA_LIB_PTH}/libnppicc.so" \
+        -DCUDA_nppicom_LIBRARY="${CUDA_LIB_PTH}/libnppicom.so" \
+        -DCUDA_nppidei_LIBRARY="${CUDA_LIB_PTH}/libnppidei.so" \
+        -DCUDA_nppif_LIBRARY="${CUDA_LIB_PTH}/libnppif.so" \
+        -DCUDA_nppig_LIBRARY="${CUDA_LIB_PTH}/libnppig.so" \
+        -DCUDA_nppim_LIBRARY="${CUDA_LIB_PTH}/libnppim.so" \
+        -DCUDA_nppist_LIBRARY="${CUDA_LIB_PTH}/libnppist.so" \
+        -DCUDA_nppisu_LIBRARY="${CUDA_LIB_PTH}/libnppisu.so" \
+        -DCUDA_nppitc_LIBRARY="${CUDA_LIB_PTH}/libnppitc.so" \
+        -DCUDA_npps_LIBRARY="${CUDA_LIB_PTH}/libnpps.so" \
         .. \
     && make install
 
