@@ -10,7 +10,8 @@ apt-get purge -y nvidia-docker
 # Add the package repositories
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
   apt-key add -
-curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu16.04/amd64/nvidia-docker.list | \
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | \
   tee /etc/apt/sources.list.d/nvidia-docker.list
 apt-get update
 
