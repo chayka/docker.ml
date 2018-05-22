@@ -32,26 +32,27 @@ ENV CUDA_TOOLKIT_ROOT_DIR="/usr/local/cuda-9.0"
 ENV CUDA_LIB_PATH="${CUDA_TOOLKIT_ROOT_DIR}/targets/x86_64-linux/lib"
 ENV LD_LIBRARY_PATH="${CUDA_LIB_PATH}:${LD_LIBRARY_PATH}"
 RUN cd /opencv/build && \
+    cmake --help-variable-list .. && \
     cmake \
-        -DWITH_CUDA=ON \
-        -DCUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} \
-        -DCUDA_LIB_PATH=${CUDA_LIB_PATH} \
-        -DWITH_OPENGL=ON \
-        -DWITH_OPENCL=ON \
-        -DWITH_IPP=ON \
-        -DWITH_TBB=ON \
-        -DWITH_EIGEN=ON \
-        -DWITH_V4L=ON \
-        -DENABLE_AVX=ON \
-        -DBUILD_TIFF=ON \
-        -DBUILD_TESTS=OFF \
-        -DBUILD_PERF_TESTS=OFF \
-        -DBUILD_opencv_java=OFF \
-        -DCMAKE_BUILD_TYPE=RELEASE \
-        -DCMAKE_INSTALL_PREFIX=$(python3.5 -c "import sys; print(sys.prefix)") \
-        -DPYTHON_EXECUTABLE=$(which python3.5) \
-        -DPYTHON_INCLUDE_DIR=$(python3.5 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
-        -DPYTHON_PACKAGES_PATH=$(python3.5 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
+        -D WITH_CUDA=ON \
+        -D CUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} \
+        -D CUDA_LIB_PATH=${CUDA_LIB_PATH} \
+        -D WITH_OPENGL=ON \
+        -D WITH_OPENCL=ON \
+        -D WITH_IPP=ON \
+        -D WITH_TBB=ON \
+        -D WITH_EIGEN=ON \
+        -D WITH_V4L=ON \
+        -D ENABLE_AVX=ON \
+        -D BUILD_TIFF=ON \
+        -D BUILD_TESTS=OFF \
+        -D BUILD_PERF_TESTS=OFF \
+        -D BUILD_opencv_java=OFF \
+        -D CMAKE_BUILD_TYPE=RELEASE \
+        -D CMAKE_INSTALL_PREFIX=$(python3.5 -c "import sys; print(sys.prefix)") \
+        -D PYTHON_EXECUTABLE=$(which python3.5) \
+        -D PYTHON_INCLUDE_DIR=$(python3.5 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
+        -D PYTHON_PACKAGES_PATH=$(python3.5 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
         .. \
     && make install
         # -DCUDA_cublas_LIBRARY="${CUDA_LIB_PTH}/libcublas.so" \
