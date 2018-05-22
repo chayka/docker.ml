@@ -31,7 +31,7 @@ RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/ope
 ENV CUDA_TOOLKIT_ROOT_DIR="/usr/local/cuda-9.0"
 ENV CUDA_LIB_PATH="${CUDA_TOOLKIT_ROOT_DIR}/targets/x86_64-linux/lib"
 ENV LD_LIBRARY_PATH="${CUDA_LIB_PATH}:${LD_LIBRARY_PATH}"
-RUN apt-get install -Y cuda-npp-9-0
+RUN apt-get install -y cuda-npp-9-0
 RUN cd /opencv/build && \
     cmake -LAH \
         -D WITH_CUDA=ON \
