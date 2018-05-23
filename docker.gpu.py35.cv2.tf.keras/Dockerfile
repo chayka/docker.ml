@@ -32,7 +32,7 @@ ENV CUDA_TOOLKIT_ROOT_DIR="/usr/local/cuda-9.0"
 ENV CUDA_LIB_PATH="${CUDA_TOOLKIT_ROOT_DIR}/targets/x86_64-linux/lib"
 ENV LD_LIBRARY_PATH="${CUDA_LIB_PATH}:${LD_LIBRARY_PATH}"
 
-RUN apt-get install -y cuda-npp-9-0 && \
+RUN apt-get install -y nvidia-cuda-dev cuda-npp-9-0 && \
     cd ${CUDA_LIB_PATH} && \
     ln -s libnppig.so.9.0 libnppig.so && \
     ln -s libnpps.so.9.0 libnpps.so && \
