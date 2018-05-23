@@ -1,5 +1,5 @@
-# FROM tensorflow/tensorflow:latest-gpu-py3
-FROM tensorflow/tensorflow:latest-devel-gpu-py3
+FROM tensorflow/tensorflow:latest-gpu-py3
+# FROM tensorflow/tensorflow:latest-devel-gpu-py3
 
 RUN apt-get update && \
         apt-get install -y \
@@ -33,24 +33,11 @@ ENV CUDA_LIB_PATH="${CUDA_TOOLKIT_ROOT_DIR}/targets/x86_64-linux/lib"
 ENV LD_LIBRARY_PATH="${CUDA_LIB_PATH}:${LD_LIBRARY_PATH}"
 
 RUN apt-get install -y cuda-libraries-dev-9-0
-# RUN apt-get install -y nvidia-cuda-dev cuda-npp-9-0 && \
-#     cd ${CUDA_LIB_PATH} && \
-#     ln -s libnppig.so.9.0 libnppig.so && \
-#     ln -s libnpps.so.9.0 libnpps.so && \
-#     ln -s libnppim.so.9.0 libnppim.so && \
-#     ln -s libnppicom.so.9.0 libnppicom.so && \
-#     ln -s libnppitc.so.9.0 libnppitc.so && \
-#     ln -s libnppicc.so.9.0 libnppicc.so && \
-#     ln -s libnppidei.so.9.0 libnppidei.so && \
-#     ln -s libnppial.so.9.0 libnppial.so && \
-#     ln -s libnppisu.so.9.0 libnppisu.so && \
-#     ln -s libnppif.so.9.0 libnppif.so && \
-#     ln -s libnppc.so.9.0 libnppc.so && \
-#     ln -s libnppist.so.9.0 libnppist.so
 
 RUN cd /opencv/build && \
     cmake -LAH \
         -D WITH_CUDA=ON \
+        -D CUDA_FAST_MATH=ON \
         -D CUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} \
         -D CUDA_LIB_PATH=${CUDA_LIB_PATH} \
         -D WITH_OPENGL=ON \
@@ -71,20 +58,6 @@ RUN cd /opencv/build && \
         -D PYTHON_PACKAGES_PATH=$(python3.5 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
         .. \
     && make install
-        # -DCUDA_cublas_LIBRARY="${CUDA_LIB_PTH}/libcublas.so" \
-        # -DCUDA_cufft_LIBRARY="${CUDA_LIB_PTH}/libcufft.so" \
-        # -DCUDA_nppc_LIBRARY="${CUDA_LIB_PTH}/libnppc.so" \
-        # -DCUDA_nppial_LIBRARY="${CUDA_LIB_PTH}/libnppial.so" \
-        # -DCUDA_nppicc_LIBRARY="${CUDA_LIB_PTH}/libnppicc.so" \
-        # -DCUDA_nppicom_LIBRARY="${CUDA_LIB_PTH}/libnppicom.so" \
-        # -DCUDA_nppidei_LIBRARY="${CUDA_LIB_PTH}/libnppidei.so" \
-        # -DCUDA_nppif_LIBRARY="${CUDA_LIB_PTH}/libnppif.so" \
-        # -DCUDA_nppig_LIBRARY="${CUDA_LIB_PTH}/libnppig.so" \
-        # -DCUDA_nppim_LIBRARY="${CUDA_LIB_PTH}/libnppim.so" \
-        # -DCUDA_nppist_LIBRARY="${CUDA_LIB_PTH}/libnppist.so" \
-        # -DCUDA_nppisu_LIBRARY="${CUDA_LIB_PTH}/libnppisu.so" \
-        # -DCUDA_nppitc_LIBRARY="${CUDA_LIB_PTH}/libnppitc.so" \
-        # -DCUDA_npps_LIBRARY="${CUDA_LIB_PTH}/libnpps.so" \
 
 RUN pip install scikit-image seaborn theano keras
 
