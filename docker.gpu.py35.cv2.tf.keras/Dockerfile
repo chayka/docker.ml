@@ -31,7 +31,22 @@ RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/ope
 ENV CUDA_TOOLKIT_ROOT_DIR="/usr/local/cuda-9.0"
 ENV CUDA_LIB_PATH="${CUDA_TOOLKIT_ROOT_DIR}/targets/x86_64-linux/lib"
 ENV LD_LIBRARY_PATH="${CUDA_LIB_PATH}:${LD_LIBRARY_PATH}"
-RUN apt-get install -y cuda-npp-9-0 libnppc7.5 libnppi7.5 libnpps7.5
+
+RUN apt-get install -y cuda-npp-9-0 && \
+    cd ${CUDA_LIB_PATH} && \
+    ln -s libnppig.so.9.0 libnppig.so && \
+    ln -s libnpps.so.9.0 libnpps.so && \
+    ln -s libnppim.so.9.0 libnppim.so && \
+    ln -s libnppicom.so.9.0 libnppicom.so && \
+    ln -s libnppitc.so.9.0 libnppitc.so && \
+    ln -s libnppicc.so.9.0 libnppicc.so && \
+    ln -s libnppidei.so.9.0 libnppidei.so && \
+    ln -s libnppial.so.9.0 libnppial.so && \
+    ln -s libnppisu.so.9.0 libnppisu.so && \
+    ln -s libnppif.so.9.0 libnppif.so && \
+    ln -s libnppc.so.9.0 libnppc.so && \
+    ln -s libnppist.so.9.0 libnppist.so
+
 RUN cd /opencv/build && \
     cmake -LAH \
         -D WITH_CUDA=ON \
