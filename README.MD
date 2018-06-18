@@ -42,13 +42,13 @@ nvidia-smi
 For GPU instance:
 ```
 cd ./docker.gpu.py35.cv2.tf.keras
-nvidia-docker build -t chayka/ml:gpu.gpu.py35.cv2.tf.keras .
+nvidia-docker build -t chayka/ml:gpu.py35.cv2.tf.keras .
 ```
 
 For non-GPU instance:
 ```
 cd ./docker.cpu.py35.cv2.tf.keras
-nvidia-docker build -t chayka/ml:cpu.gpu.py35.cv2.tf.keras .
+nvidia-docker build -t chayka/ml:cpu.py35.cv2.tf.keras .
 ```
 
 ## 5. Install screen (optional)

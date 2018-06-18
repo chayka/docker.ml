@@ -61,5 +61,5 @@ RUN cd /opencv/build && \
 
 RUN pip install scikit-image seaborn theano keras
 
-RUN pip install falcon falcon-cors falcon-auth PyJWT gunicorn httpie
+RUN pip install falcon falcon-cors falcon-auth PyJWT cryptography gunicorn httpie
 RUN apt-get install -y python3-tk
