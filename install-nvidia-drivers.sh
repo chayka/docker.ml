@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # scenario is taken from: http://www.linuxandubuntu.com/home/how-to-install-latest-nvidia-drivers-in-linux
+# for 18.04 try this one instead: https://www.pugetsystems.com/labs/hpc/How-to-install-CUDA-9-2-on-Ubuntu-18-04-1184/
 
 apt-get purge -y nvidia*
 apt-get purge -y cuda*
@@ -30,7 +31,9 @@ dpkg -i libnccl2_2.1.4-1+cuda9.0_amd64.deb
 dpkg -i libnccl-dev_2.1.4-1+cuda9.0_amd64.deb
 apt-get update
 # nvidia_latest_driver=$(apt-cache search "nvidia-[0-9]{1,}\s" | grep -E "^nvidia-[0-9]{1,4}" -o | tail -1)
-apt-get install -y nvidia-390 cuda libcudnn7-dev libnccl-dev
+apt-get install -y libcudnn7-dev libnccl-dev
+apt-get install -y nvidia-390
+apt-get install -y cuda
 
 echo "Now need to REBOOT your server for the new drivers to kick in"
 echo "AFTER REBOOT check if drivers are working:"

@@ -24,7 +24,7 @@ RUN apt-get update && \
 RUN pip install numpy
 
 WORKDIR /
-ENV OPENCV_VERSION="3.4.1"
+ENV OPENCV_VERSION="3.4.3"
 RUN git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv.git && \
     git clone -b ${OPENCV_VERSION} --single-branch https://github.com/opencv/opencv_contrib.git && \
     mkdir /opencv/build
@@ -36,6 +36,7 @@ RUN apt-get install -y cuda-libraries-dev-9-0
 
 RUN cd /opencv/build && \
     cmake -LAH \
+        -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
         -D WITH_CUDA=ON \
         -D CUDA_FAST_MATH=ON \
         -D CUDA_TOOLKIT_ROOT_DIR=${CUDA_TOOLKIT_ROOT_DIR} \
